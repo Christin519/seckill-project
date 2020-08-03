@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czw.mapper.OrderMapper">
+    <insert id="insertSeckill">
+        insert into order_seckill (user_id,goods_id,order_id)values (#{userId},#{goodsId},#{orderId})
+    </insert>
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO order_info
+            (user_id, goods_id, goods_name, goods_count, goods_price, order_channel, status, create_date)
+        VALUES
+            (#{userId}, #{goodsId}, #{goodsName}, #{goodsCount}, #{goodsPrice}, #{orderChannel},#{status},#{createDate});
+    </insert>
+</mapper>

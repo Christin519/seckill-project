@@ -1,0 +1,94 @@
+# DataSource Config
+spring:
+  datasource:
+    username: 'root'
+    password: 'root'
+    url: 'jdbc:mysql://localhost:3306/seckill?serverTimezone=UTC'
+    type: com.alibaba.druid.pool.DruidDataSource
+    #   数据源其他配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat
+#    filters:
+#      stat:
+#        enabled: true
+#        log-slow-sql: true
+#        slow-sql-millis: 1000
+#        merge-sql: false
+    #      filters:
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+  #rabbitmq
+  rabbitmq:
+    host: 127.0.0.1
+    username: guest
+    password: guest
+    port: 5672
+    virtual-host: /
+    listener:
+      simple:
+        auto-startup: true
+        concurrency: 10
+        default-requeue-rejected: true
+        max-concurrency: 10
+        prefetch: 1
+    template:
+      retry:
+        enabled: 'true '
+        initial-interval: 1000
+        max-attempts: 3
+        max-interval: 10000
+        multiplier: 1.0
+
+#  redis:
+#    host: 47.94.147.104
+#    port: 6380
+#    password: '20110519'
+#    lettuce:
+#      pool:
+#        # 连接池最大连接数(使用负值表示没有限制) 默认为8
+#        max-active: 8
+#        # 连接池中的最大空闲连接 默认为8
+#        max-idle: 8
+#        # 连接池中的最小空闲连接 默认为 0
+#        min-idle: 0
+#        # 连接池最大阻塞等待时间(使用负值表示没有限制) 默认为-1
+#        max-wait: -1ms
+
+#
+mybatis-plus:
+#  mapper-locations: 'classpath:mapper/*xml'
+  configuration:
+    map-underscore-to-camel-case: true
+
+#虚拟机redis
+#redis:
+#  host: 192.168.104.252
+#  port: 6380
+#  timeout: 3
+#  password: '20110519'
+#  poolMaxTotal: 1000
+#  poolMaxIdle: 500
+#  poolMaxWait: 3
+#本机redis
+redis:
+  host: 127.0.0.1
+  port: 6379
+  timeout: 3
+  poolMaxTotal: 1000
+  poolMaxIdle: 500
+  poolMaxWait: 3
+
+
